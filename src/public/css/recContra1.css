@@ -1,0 +1,11 @@
+#divContra {
+    width: 400px;
+    border-style: solid ;
+    /* border-color: #; */
+    border-width: 2px;
+    background-color: #e9c893;
+}
+
+body{
+    background-color: #1E392A;
+}
