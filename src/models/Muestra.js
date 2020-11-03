@@ -52,7 +52,6 @@ module.exports = {
 
     solicMuestras: (idSolicitud, result) => {
         connection.query('select idMuestra from Muestra where idSolicitud1 = ?', idSolicitud, (err, rows) => {
-            console.log(rows);
             if (err)
                 return result(err);
 

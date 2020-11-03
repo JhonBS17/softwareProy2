@@ -33,7 +33,6 @@ agricultor.requestSave = (req, res) => {
         }
         muestras = [];
         muestra.solicMuestras(rows1[0].idSolicitud, (rows) => {
-            console.log(rows);
             req.flash('solicMuestrasMessage', 'Se ha creado la solicitud con éxito. Debe tener en cuenta los siguientes ID de sus muestras');
             res.render('agricultor/muestras', {
                 muestras: rows,
@@ -151,6 +150,7 @@ agricultor.downloadExcel = (req, res) => {
 agricultor.pagoConf = (req, res) => {
     //res.render('test', { resultado: req.body })
     res.send('ok');
+    console.log(req.query);
 }
 
 module.exports = agricultor;

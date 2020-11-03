@@ -18,8 +18,8 @@ router.post('/updateEmail', isLoggedIn, analisis.updateEmail);
 router.post('/updatePassword', isLoggedIn, validations.updateProfilePassword(), analisis.updatePassword);
 router.get('/downloadPDF/:file', isLoggedIn, analisis.downloadPDF);
 router.get('/downloadExcel/:file', isLoggedIn, analisis.downloadExcel);
-router.get('/pago', analisis.requestSave);
-router.post('/pago', analisis.pagoConf);
+router.get('/pago', analisis.pagoConf);
+router.post('/pago', analisis.requestSave);
 
 function isLoggedIn (req, res, next) {
 	if (req.isAuthenticated()) {
