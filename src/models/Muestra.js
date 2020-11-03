@@ -35,7 +35,7 @@ module.exports = {
     createM: (data, idSolicitud, result) => {
 
         analista.getAnalistaAsign((userAn) => {
-            connection.query(`insert into Muestra(cultivosActAgricultor, cultivosFutAgricultor, observacionAgricultor, estadoMuestra, usuario_Analista1, idSolicitud1) values (?, ?, ?, ?, ?)`, [data.cultivosActAgricultor, data.cultivosFutAgricultor,
+            connection.query(`insert into Muestra(cultivosActAgricultor, cultivosFutAgricultor, observacionAgricultor, estadoMuestra, usuario_Analista1, idSolicitud1) values (?, ?, ?, ?, ?, ?)`, [data.cultivosActAgricultor, data.cultivosFutAgricultor,
             data.observacionAgricultor, 'pendiente', userAn, idSolicitud], (err, rows) => {
 
                 if (err)
@@ -52,6 +52,8 @@ module.exports = {
 
     solicMuestras: (idSolicitud, result) => {
         connection.query('select idMuestra from Muestra where idSolicitud1 = ?', idSolicitud, (err, rows) => {
+            console.log(rows);
+            console.log(err);
             if (err)
                 return result(err);
 

@@ -4,7 +4,6 @@ module.exports = {
 
     createS: (user, idFactura, result) => {
         connection.query('insert into Solicitud(estadoSolicitud, idFactura, usuario_Agricultor1) values (?, ?, ?)', ['Esperando pago', idFactura, user], (err, rows) => {
-            console.log(rows);
             if (err)
                 return result(err);
 

@@ -19,7 +19,7 @@ agricultor.requestMuestra = (req, res) => {
 
 agricultor.requestSave = (req, res) => {
 
-    console.log(req.query);
+    console.log("idFactura: "+req.query.x_id_factura);
     solicitud.createS(req.user.usuario_Agricultor, req.query.x_id_factura, (rows) => {
         console.log(rows);
     });
@@ -33,10 +33,11 @@ agricultor.requestSave = (req, res) => {
             });
         }
         muestras = [];
-        muestra.solicMuestras(rows1[0].idSolicitud, (rows) => {
+        muestra.solicMuestras(rows1[0].idSolicitud, (rows2) => {
+            console.log(rows2);
             req.flash('solicMuestrasMessage', 'Se ha creado la solicitud con éxito. Debe tener en cuenta los siguientes ID de sus muestras');
             res.render('agricultor/muestras', {
-                muestras: rows,
+                muestras: rows2,
                 nombreUsuario: req.user.usuario_Agricultor,
                 solicitud: rows1[0], 
                 message: req.flash('solicMuestrasMessage')
