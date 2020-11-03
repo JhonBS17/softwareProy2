@@ -6,7 +6,7 @@ module.exports = {
     muestras: (user, result) => {
         connection.query(`select nombre_Agricultor, idMuestra, usuario_Analista1, idSolicitud1 from Solicitud 
             join Muestra join Agricultor on (Agricultor.usuario_Agricultor = Solicitud.usuario_Agricultor1 
-            and Solicitud.idSolicitud = Muestra.idSolicitud1) where usuario_Analista1 = ? and estadoMuestra = ?`, user, (err, rows) => {
+            and Solicitud.idSolicitud = Muestra.idSolicitud1) where usuario_Analista1 = ? and estadoMuestra = ?`, [user, 'pendiente'], (err, rows) => {
 
             if (err)
                 return result(err);
@@ -35,12 +35,12 @@ module.exports = {
     createM: (data, idSolicitud, result) => {
 
         analista.getAnalistaAsign((userAn) => {
-            connection.query(`insert into Muestra(cultivosActAgricultor, cultivosFutAgricultor, observacionAgricultor, estadoMuestra, usuario_Analista1, idSolicitud1) values (?, ?, ?, ?, ?)`, [data.cultivosActAgricultor, data.cultivosFutAgricultor, 
-                data.observacionAgricultor, 'pendiente', userAn, idSolicitud], (err, rows) => {
-                
+            connection.query(`insert into Muestra(cultivosActAgricultor, cultivosFutAgricultor, observacionAgricultor, estadoMuestra, usuario_Analista1, idSolicitud1) values (?, ?, ?, ?, ?)`, [data.cultivosActAgricultor, data.cultivosFutAgricultor,
+            data.observacionAgricultor, 'pendiente', userAn, idSolicitud], (err, rows) => {
+
                 if (err)
                     return result(err);
-    
+
                 if (rows.length <= 0) {
                     return result(err);
                 } else {
@@ -62,5 +62,19 @@ module.exports = {
             }
         })
     },
+
+    updateEstado: (idMuestra, result) => {
+        connection.query('UPDATE Muestra SET estadoMuestra = ? WHERE idMuestra = ?', ['realizada', idMuestra], (err, rows) => {
+            if (err)
+                return result(err);
+
+            if (rows.length <= 0) {
+                return result(err);
+            } else {
+                return result(rows);
+            }
+
+        })
+    }
 
 }

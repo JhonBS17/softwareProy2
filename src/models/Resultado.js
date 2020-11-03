@@ -1,4 +1,5 @@
-const { connection } = require('../database/connectionDB');
+const { connection } = require('../database/connectionDB'),
+    muestra = require("../models/Muestra");
 
 module.exports = {
 
@@ -59,6 +60,9 @@ module.exports = {
                     if (rows.length <= 0) {
                         return result(err);
                     } else {
+                        muestra.updateEstado(idMuestra, (rows) => {
+                            console.log('yes');
+                        })
                         return result(rows);
                     }
                 });

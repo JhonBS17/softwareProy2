@@ -19,8 +19,9 @@ agricultor.requestMuestra = (req, res) => {
 
 agricultor.requestSave = (req, res) => {
 
+    console.log(req.query);
     solicitud.createS(req.user.usuario_Agricultor, req.query.x_id_factura, (rows) => {
-        console.log('yes');
+        console.log(rows);
     });
 
     solicitud.getByUser(req.user.usuario_Agricultor, (rows1) => {
