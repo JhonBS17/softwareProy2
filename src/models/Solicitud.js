@@ -2,8 +2,8 @@ const { connection } = require('../database/connectionDB');
 
 module.exports = {
 
-    createS: (user, result) => {
-        connection.query('insert into Solicitud(estadoSolicitud, usuario_Agricultor1) values (?, ?)', ['Esperando pago', user], (err, rows) => {
+    createS: (user, idFactura, result) => {
+        connection.query('insert into Solicitud(estadoSolicitud, idFactura, usuario_Agricultor1) values (?, ?, ?)', ['Esperando pago', idFactura, user], (err, rows) => {
             if (err)
                 return result(err);
 

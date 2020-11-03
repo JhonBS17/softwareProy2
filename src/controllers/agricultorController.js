@@ -19,7 +19,7 @@ agricultor.requestMuestra = (req, res) => {
 
 agricultor.requestSave = (req, res) => {
 
-    solicitud.createS(req.user.usuario_Agricultor, (rows) => {
+    solicitud.createS(req.user.usuario_Agricultor, req.query.x_id_factura, (rows) => {
         console.log('yes');
     });
 
@@ -33,9 +33,11 @@ agricultor.requestSave = (req, res) => {
         }
         muestras = [];
         muestra.solicMuestras(rows1[0].idSolicitud, (rows) => {
+            console.log(rows);
             req.flash('solicMuestrasMessage', 'Se ha creado la solicitud con éxito. Debe tener en cuenta los siguientes ID de sus muestras');
             res.render('agricultor/muestras', {
                 muestras: rows,
+                nombreUsuario: req.user.usuario_Agricultor,
                 solicitud: rows1[0], 
                 message: req.flash('solicMuestrasMessage')
             });
@@ -147,7 +149,8 @@ agricultor.downloadExcel = (req, res) => {
 };
 
 agricultor.pagoConf = (req, res) => {
-    res.render('test', { resultado: req.body })
+    //res.render('test', { resultado: req.body })
+    res.send('ok');
 }
 
 module.exports = agricultor;
